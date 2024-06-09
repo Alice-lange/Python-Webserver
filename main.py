@@ -52,7 +52,6 @@ class Webserver:
             headers_part = http_req[0].decode('utf-8')
             body_part = b'' if len(http_req) == 1 else http_req[1]
 
-            logging.info(f'HTTP request received:\n{headers_part}\n{body_part}')
         except Exception as exception:
             logging.error('Error decoding HTTP request', exc_info=True)
             return None
@@ -117,7 +116,6 @@ class Webserver:
                 if binary:
                     parsed_request = self._http_parser(binary)
                     if parsed_request:
-                        logging.info(f'Parsed request: {parsed_request}')
                         response = self._handle_request(parsed_request)
                         client_socket.sendall(response)
                     else:
